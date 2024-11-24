@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { emailValidator, getErrorMessage, toggleLoader } from '../../../shared/helpers/function-helpers.service';
 import { RegisterService } from './service/register.service';
 import { LoaderService } from '../../../shared/services/loader.service';
 import { finalize } from 'rxjs';
 import { ModalService } from '../../../shared/services/modal.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ CommonModule, ReactiveFormsModule ],
+  imports: [ CommonModule, ReactiveFormsModule, RouterModule ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -22,11 +24,11 @@ export default class RegisterComponent {
   private registerService = inject(RegisterService);
   private loaderService = inject(LoaderService);
   private modalService = inject(ModalService);
+  private _destroyRef = inject(DestroyRef);
 
 
 
   ngOnInit(): void {
-    this.modalService.openModal('Exitoso!', 'Bienvenido a TutorApp','success');
       this.registerForm = this.formBuilder.group({
         name: ['', Validators.required],
         lastName: ['', Validators.required],
@@ -50,7 +52,8 @@ export default class RegisterComponent {
 
     toggleLoader(this.loaderService, true, 'Registrando usuario...');
     this.registerService.register(this.registerForm.value).pipe(
-      finalize(() => toggleLoader(this.loaderService, false))
+      finalize(() => toggleLoader(this.loaderService, false)),
+      takeUntilDestroyed(this._destroyRef)
     ).subscribe({
       next: (response) => {
         console.log(response)

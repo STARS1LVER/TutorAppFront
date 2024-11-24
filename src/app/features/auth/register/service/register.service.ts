@@ -16,4 +16,8 @@ export class RegisterService {
         return this.http.post(`${this.apiUrl}auth/register`, data);
     }
 
+    public login( data: any ): Observable<any> {
+        return this.http.post(`${this.apiUrl}auth/login`, data);
+    }
+
 }

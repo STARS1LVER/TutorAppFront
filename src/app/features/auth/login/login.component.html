@@ -1,0 +1,78 @@
+<div class="min-h-screen bg-white dark:bg-gray-900 flex">
+  <!-- Contenedor principal -->
+  <div class="w-full flex flex-col md:flex-row">
+    
+    <!-- Columna izquierda - Formulario -->
+    <div class="w-full md:w-1/2 flex flex-col min-h-screen p-6">
+      <!-- Contenedor para centrar el formulario verticalmente -->
+      <div class="flex-grow flex items-center justify-center">
+        <div class="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg">
+          <div class="flex justify-center mb-6">
+            <a href="https://flowbite.com/" class="flex items-center">
+                <img src="https://www.cuc.edu.co/wp-content/uploads/2024/03/logo_cuc.png" class="h-[5.1rem]" alt="Flowbite Logo">
+            </a>
+          </div>
+
+          <h2 class="text-2xl text-center font-bold mb-6" style="color: rgb(156, 22, 20)">Iniciar Sesión</h2>
+          
+          <form class="space-y-4" [formGroup]="loginForm">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Correo</label>
+              <input type="email" 
+                     formControlName="email"
+                     class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-[rgb(156,22,20)] focus:border-[rgb(156,22,20)] outline-none">
+                     <span class="text-red-500 text-xs mt-1" *ngIf="getFieldError('name')">
+                        {{ getFieldError('email') }}
+                      </span>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Contraseña</label>
+              <input type="password" 
+                     formControlName="password"
+                     class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-[rgb(156,22,20)] focus:border-[rgb(156,22,20)] outline-none">
+                <span class="text-red-500 text-xs mt-1" *ngIf="getFieldError('name')">
+                        {{ getFieldError('password') }}
+                </span>
+            </div>
+
+
+            <button type="submit" 
+                    class="w-full text-white font-medium py-2 px-4 rounded-lg transition-colors hover:opacity-90"
+                    style="background-color: rgb(156, 22, 20)"
+                    (click)="login()">
+              Iniciar Sesión
+            </button>
+
+            <p class="text-center text-gray-600 dark:text-gray-400 text-sm">
+              ¿No tienes una cuenta? 
+              <button routerLink="/register" class="hover:opacity-90" style="color: rgb(156, 22, 20)">Regístrate aquí</button>
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="bg-white rounded-lg shadow dark:bg-gray-800 mt-auto">
+        <div class="w-full p-4 md:flex md:items-center md:justify-between">
+          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.</span>
+          <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <li><a href="#" class="hover:underline me-4 md:me-6">About</a></li>
+            <li><a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a></li>
+            <li><a href="#" class="hover:underline me-4 md:me-6">Licensing</a></li>
+            <li><a href="#" class="hover:underline">Contact</a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Columna derecha - Imagen -->
+    <div class="hidden md:block md:w-1/2 h-screen">
+      <div class="image-container">
+        <img src="https://www.cuc.edu.co/wp-content/uploads/2022/08/unnamed-scaled.jpg" 
+             alt="Logo CUC" 
+             class="w-full h-full">
+      </div>
+    </div>
+  </div>
+</div>
