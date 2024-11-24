@@ -1,0 +1,6 @@
+<div class="loader-overlay" *ngIf="loaderService.loading$ | async">
+  <div class="loader-container">
+    <img src="assets/image/logo.svg" class="pulse-logo" alt="Logo loader">
+    <p class="loader-message">{{ loaderService.message$ | async }}</p>
+  </div>
+</div>

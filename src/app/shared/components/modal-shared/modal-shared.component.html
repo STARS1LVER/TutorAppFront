@@ -1,0 +1,64 @@
+<div
+  [@fade]="showModal ? 'visible' : 'hidden'"
+  *ngIf="showModal"
+  class="modal-payment-background overflow-auto"
+>
+  <div class="modal-payment">
+    <span class="modal-close" *ngIf="register != 21" (click)="closeModal()">
+      <i class="fa-solid fa-circle-xmark close"></i>
+    </span>
+    <div class="pe-none">
+      <header [ngClass]="type">
+        <img src="https://www.cuc.edu.co/wp-content/uploads/2024/03/logo_cuc_vertical.png" class="logo-cuc" alt="Logo CUC"/>
+        <div *ngIf="type === 'info'">
+          <i class="fa-solid fa-circle-info"></i>
+        </div>
+        <div *ngIf="type === 'warning'">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <div *ngIf="type === 'error'">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </div>
+        <div *ngIf="type === 'success'">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <svg
+          class="wave"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+        >
+        </svg>
+      </header>
+      <div class="modal-content">
+        <h2 class="fs-2 pb-1" *ngIf="title !== ''">
+          {{ title !== null && title !== undefined ? title : 'Error' }}
+        </h2>
+
+        <p class="description pb-2" 
+          [innerHTML]="description || '¡Ocurrió un error, estamos trabajando para solucionarlo!'">
+        </p>
+
+        <div class="modal-footer">
+          <!-- Botón de aceptar -->
+          <button
+            class="btn-alert accept-button"
+            [ngClass]="type"
+            (click)="acceptModal()"
+          >
+            {{ buttonConfig.acceptText }}
+          </button>
+
+          <!-- Botón de rechazar si se muestra -->
+          <button
+            *ngIf="buttonConfig.showCancel"
+            class="btn-alert reject-button"
+            [ngClass]="type"
+            (click)="rejectModal()"
+          >
+            {{ buttonConfig.cancelText }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

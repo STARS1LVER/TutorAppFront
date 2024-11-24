@@ -1,0 +1,163 @@
+.modal-payment-background {
+    background-color: rgba(0, 0, 0, 0.119);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    z-index: 10000;
+  }
+
+  .modal-payment {
+    width: 26rem;
+    border-radius: 1.1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    pointer-events: all;
+    overflow: hidden;
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 2rem;
+    padding-top: 1rem;
+    border: none;
+  }
+
+  h2 {
+    text-align: center;
+    color: #484848;
+    font-weight: 600;
+    font-size: 3rem;
+  }
+
+  header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    color: #fff;
+    margin: 0;
+    position: relative;
+
+    .wave {
+      position: absolute;
+      top: 159px;
+      z-index: 1;
+    }
+
+    i {
+      font-size: 6rem;
+    }
+
+    &.info, &.warning, &.error, &.success {
+      background-color: rgb(156, 22, 20) !important;
+    }
+  }
+
+  .description {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #484848;
+  }
+
+  button.btn-alert {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 10rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin: 0;
+    color: #e9be6f !important;
+
+    &.info, &.warning, &.error, &.success {
+      background-color: rgb(156, 22, 20) !important;
+
+      &:hover {
+        background-color: rgba(156, 22, 20, 0.9) !important;
+      }
+    }
+  }
+
+  .modal-close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+    z-index: 1;
+
+    i {
+      color: white;
+      font-size: 1.5rem;
+    }
+  }
+
+
+
+  .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .btn-alert {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .accept-button, .reject-button {
+    background-color: rgb(156, 22, 20) !important;
+    color: #e9be6f !important;
+
+    &:hover {
+      background-color: rgba(156, 22, 20, 0.9) !important;
+    }
+  }
+
+  .accept-button {
+    background-color: #1fe679;
+    color: white !important;
+  }
+
+  .reject-button {
+    background-color: #f66b7e !important;
+    color: white !important;
+  }
+
+  .reject-button:hover {
+    background-color: darkred;
+  }
+
+  .accept-button:hover {
+    background-color: #17d468; /* Un color más oscuro en hover */
+  }
+
+
+  i{
+    color: #fff !important;
+  }
+
+  .logo-cuc {
+    position: absolute;
+    top: 14px;
+    left: 14%;
+    transform: translateX(-50%);
+    width: 120px;
+    z-index: 2;
+  }

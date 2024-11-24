@@ -1,0 +1,37 @@
+/* Estilos para el hover y selected */
+select option:hover,
+select option:focus,
+select option:active,
+select option:checked {
+    background: rgb(156,22,20) !important;
+    background-color: rgb(156,22,20) !important;
+    color: white !important;
+}
+
+/* Específicamente para el hover */
+select option:hover {
+    background: rgb(156,22,20) !important;
+    background-color: rgb(156,22,20) !important;
+    color: white !important;
+    box-shadow: 0 0 10px 100px rgb(156,22,20) inset !important;
+}
+
+/* Para Firefox */
+select:-moz-focusring {
+    color: transparent !important;
+    text-shadow: 0 0 0 #000 !important;
+}
+
+/* Para Chrome y Safari */
+select option:hover,
+select option:focus {
+    background: rgb(156,22,20) !important;
+    background-color: rgb(156,22,20) !important;
+    color: white !important;
+}
+
+/* Para IE y Edge */
+select:focus::-ms-value {
+    background-color: rgb(156,22,20) !important;
+    color: white !important;
+}
