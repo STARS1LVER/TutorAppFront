@@ -1,4 +1,5 @@
-
+@if (!isLoading) {
+  
 
 <section class="bg-gray-50 mt-16 py-8 antialiased dark:bg-gray-900 md:py-12">
   <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
@@ -6,7 +7,7 @@
         class="mb-4 flex items-center text-sm " 
         [items]="[
           { label: 'Materias', url: 'students/list-subjects', icon: 'fas fa-book'},
-          { label: 'Nombre de la Materia', icon: 'fas fa-graduation-cap' }
+          { label: subject?.name, icon: 'fas fa-graduation-cap' }
         ]">
       </app-breadcumb>
       <!-- Contenedor principal -->
@@ -19,32 +20,32 @@
             <span class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium"
                   [style.backgroundColor]="'rgba(156, 22, 20, 0.1)'"
                   [style.color]="'rgb(156, 22, 20)'">
-              Semestre 
+              Semestre {{ subject?.semester }}
             </span>
-            <h1 class="mt-4 text-3xl font-bold text-gray-900"></h1>
+            <h1 class="mt-4 text-3xl font-bold text-gray-900">{{ subject?.name }}</h1>
           </div>
   
           <!-- Imagen de la materia -->
           <div class="mb-6 rounded-lg overflow-hidden">
-            <img src="https://pbs.twimg.com/profile_images/1854521149578723348/BfCBWxDz_400x400.jpg"
-                 alt="Imagen de la materia"
+            <img [src]="subject?.img_bs64"
+                 [alt]="subject?.name"
                  class="w-full h-64 object-cover">
           </div>
   
           <!-- Descripción -->
           <div class="bg-white rounded-lg p-6 shadow-sm">
             <h2 class="text-xl font-semibold mb-4">Descripción de la materia</h2>
-            <p class="text-gray-600">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda exercitationem recusandae necessitatibus? Temporibus est cumque quaerat! Veniam ex, blanditiis deleniti eligendi libero placeat molestiae vel repudiandae rem voluptates labore dolorum.   </p>
+            <p class="text-gray-600">{{ subject?.description }}</p>
             
             <!-- Detalles adicionales -->
             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="p-4 bg-gray-50 rounded-lg">
                 <h3 class="font-medium text-gray-900">Código</h3>
-                <p class="text-gray-600">#121</p>
+                <p class="text-gray-600">#{{ subject?.code }}</p>
               </div>
               <div class="p-4 bg-gray-50 rounded-lg">
                 <h3 class="font-medium text-gray-900">Créditos</h3>
-                <p class="text-gray-600">4</p>
+                <p class="text-gray-600">{{ subject?.credits }}</p>
               </div>
             </div>
           </div>
@@ -66,7 +67,7 @@
   
             <!-- Botón de información del tutor -->
             <button 
-              
+              routerLink="/under-construction"
               class="w-full text-[#1d1d1b] bg-white border border-[#1d1d1b] font-medium py-3 px-4 rounded-lg transition-colors hover:bg-gray-100">
               <i class="fas fa-user-graduate mr-2"></i>
               Ver información de los tutores
@@ -89,5 +90,7 @@
   </section>
 
 <!-- Añadir el componente del modal aquí -->
-<app-request-tutoring></app-request-tutoring>
+<app-request-tutoring [tutores]="subject?.tutors"></app-request-tutoring>
 
+
+} 

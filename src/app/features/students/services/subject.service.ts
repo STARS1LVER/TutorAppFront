@@ -16,5 +16,9 @@ export class SubjectService {
    public getSubjectById(id: string): Observable<any> {
       return this.http.get(`${this.apiUrl}subject/${id}`);
    }
+
+   public requestTutoring(id: string, date: string): Observable<any> {
+      return this.http.post(`${this.apiUrl}subject/sendRequest/${id}`, {date},{ responseType: 'text' as 'json' });
+   }
     
 }

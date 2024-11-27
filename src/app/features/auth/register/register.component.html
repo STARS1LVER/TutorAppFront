@@ -6,7 +6,7 @@
     <div class="lg:flex-1">
       <!-- Logo (visible siempre y centrado en móvil) -->
       <div class="mb-8 flex justify-center lg:justify-start">
-        <a href="https://flowbite.com/" class="flex items-center">
+        <a routerLink="/welcome-page" class="flex items-center">
           <img src="https://www.cuc.edu.co/wp-content/uploads/2024/03/logo_cuc.png" 
                class="h-[5.1rem] me-3" 
                alt="Logo CUC" />
@@ -122,7 +122,7 @@
             </span>
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Modalidad</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Modalidad de las tutorías</label>
             <select formControlName="modality"
                     class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-[rgb(156,22,20)] focus:border-[rgb(156,22,20)] outline-none"
                     [ngClass]="{'border-red-500': getFieldError('modality')}">

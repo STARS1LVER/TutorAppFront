@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SubjectService } from '../../services/subject.service';
 import { LoaderService } from '../../../../shared/services/loader.service';
 import { ModalService } from '../../../../shared/services/modal.service';
@@ -30,7 +30,8 @@ interface Tutor {
     ReactiveFormsModule,
     MatDialogModule,
     RequestTutoringComponent,
-    BreadcumbComponent
+    BreadcumbComponent,
+    RouterModule
   ],
   templateUrl: './subject-info.component.html',
   styleUrl: './subject-info.component.css'
@@ -40,6 +41,8 @@ export default class SubjectInfoComponent {
   private subjectService = inject(SubjectService);
   private loaderService = inject(LoaderService);
   private modalService = inject(ModalService);
+  public subject: any;
+  public isLoading: boolean = false;
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
@@ -50,12 +53,16 @@ export default class SubjectInfoComponent {
   }
 
   public getSubjectById(id: string): void {
+    this.isLoading = true;
     toggleLoader(this.loaderService, true, 'Cargando información de la materia...');
     this.subjectService.getSubjectById(id).pipe(
-      finalize(() => toggleLoader(this.loaderService, false))
+      finalize(() => {
+        toggleLoader(this.loaderService, false)
+        this.isLoading = false;
+      })
     ).subscribe({
       next: (res) => {
-        console.log(res);
+        this.subject = res;
       },
       error: (error) => {
         this.modalService.openModal('Error', error.error.message || 'Error al cargar la información de la materia', 'error');

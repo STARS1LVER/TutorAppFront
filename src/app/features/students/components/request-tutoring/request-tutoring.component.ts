@@ -1,8 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { getErrorMessage } from '../../../../shared/helpers/function-helpers.service';
+import { getErrorMessage, toggleLoader } from '../../../../shared/helpers/function-helpers.service';
 import { ModalService } from '../../../../shared/services/modal.service';
+import { SubjectService } from '../../services/subject.service';
+import { finalize } from 'rxjs';
+import { LoaderService } from '../../../../shared/services/loader.service';
 
 @Component({
   selector: 'app-request-tutoring',
@@ -15,20 +18,22 @@ import { ModalService } from '../../../../shared/services/modal.service';
   styleUrls: ['./request-tutoring.component.css']
 })
 export class RequestTutoringComponent {
+  @Input() tutores: any[] = [];
   tutorForm: FormGroup;
-  tutores = [
-    { id: 1, nombre: 'Juan Pérez', especialidad: 'Matemáticas' },
-    { id: 2, nombre: 'María García', especialidad: 'Física' },
-    { id: 3, nombre: 'Carlos López', especialidad: 'Programación' },
-  ];
   fechaMinima: string = new Date().toISOString().split('T')[0];
   private modalService = inject(ModalService);
+  private subjectService = inject(SubjectService)
+  private loaderService = inject(LoaderService);
 
   constructor(private fb: FormBuilder) {
     this.tutorForm = this.fb.group({
       fecha: ['', Validators.required],
       tutor: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
+    console.log(this.tutores);
   }
 
   cerrarModal() {
@@ -44,7 +49,25 @@ export class RequestTutoringComponent {
       this.modalService.openModal('Error', '¡Por favor, complete todos los campos!','error');
       return;
     }
-    console.log(this.tutorForm.value);
+
+    toggleLoader(this.loaderService, true, 'Solicitando tutoría...');
+
+    this.subjectService.requestTutoring(this.tutorForm.value.tutor, this.tutorForm.value.fecha)
+    .pipe(
+      finalize(() => {
+        toggleLoader(this.loaderService, false)
+      })
+    ).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.modalService.openModal('Exitoso!', 'Pronto se te enviará un correo con los detalles de la tutoría', 'success');
+      },
+      error: (error) => {
+        console.log(error);
+        this.modalService.openModal('Error', error.error.message || 'Error al solicitar la tutoría', 'error');
+      }
+    })  
+    
   }
 
   getFieldError(fieldName: string): string {
