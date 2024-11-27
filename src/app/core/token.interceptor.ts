@@ -23,7 +23,7 @@ export const tokenInterceptor: HttpInterceptorFn = (request, next) => {
     const allowedUrls = [
         'http://127.0.0.1:8000',
         'localhost',
-
+        'https://tutorapp-latest-1.onrender.com'
     ];
 
     // Verificar si la URL está en la lista de permitidas
