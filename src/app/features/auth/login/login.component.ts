@@ -28,16 +28,17 @@ export default class LoginComponent {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, emailValidator()]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(2)]]
     });
   }
 
   public login(): void {
-    if(  !this.loginForm.valid ){
+    if(  this.loginForm.invalid ){
+      console.log('invalid');
       this.loginForm.markAllAsTouched();
+      this.modalService.openModal('Error', '¡Por favor, complete todos los campos!','error');
       return;
     }
-
     toggleLoader(this.loaderService, true,'Iniciando sesión...');
     this.registerService.login(this.loginForm.value)
     .pipe(

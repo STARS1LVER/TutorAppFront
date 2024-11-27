@@ -1,0 +1,31 @@
+<nav class="flex" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+      <li class="inline-flex items-center">
+        <a routerLink="/" 
+           routerLinkActive="text-[rgb(156,22,20)]"
+           [routerLinkActiveOptions]="{exact: true}"
+           class="inline-flex items-center text-gray-600 hover:text-[rgb(156,22,20)]">
+          <i class="fas fa-home mr-2" style="color:#e9be6f;"></i>
+          Inicio
+        </a>
+      </li>
+      <li *ngFor="let item of items; let last = last">
+        <div class="flex items-center">
+          <i class="fas fa-chevron-right mx-2" style="color: rgb(156, 22, 20);"></i>
+          <a *ngIf="item.url" 
+             [routerLink]="item.url"
+             routerLinkActive="text-[rgb(156,22,20)]"
+             class="inline-flex items-center text-gray-600 hover:text-[rgb(156,22,20)]">
+            <i *ngIf="item.icon" [class]="item.icon + ' mr-2'" style="color: #e9be6f;"></i>
+            {{ item.label }}
+          </a>
+          <span *ngIf="!item.url" 
+                class="inline-flex items-center"
+                [ngClass]="{'text-[rgb(156,22,20)]': last, 'text-gray-600': !last}">
+            <i *ngIf="item.icon" [class]="item.icon + ' mr-2'" style="color: #e9be6f;"></i>
+            {{ item.label }}
+          </span>
+        </div>
+      </li>
+    </ol>
+</nav>

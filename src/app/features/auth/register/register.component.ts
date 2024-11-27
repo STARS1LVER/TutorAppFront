@@ -7,7 +7,7 @@ import { LoaderService } from '../../../shared/services/loader.service';
 import { finalize } from 'rxjs';
 import { ModalService } from '../../../shared/services/modal.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -25,6 +25,7 @@ export default class RegisterComponent {
   private loaderService = inject(LoaderService);
   private modalService = inject(ModalService);
   private _destroyRef = inject(DestroyRef);
+  private router = inject(Router);
 
 
 
@@ -34,7 +35,6 @@ export default class RegisterComponent {
         lastName: ['', Validators.required],
         email: ['', [Validators.required, emailValidator()]],
         password: ['', Validators.required],
-        image: [''],
         semester: ['', Validators.required],
         modality: ['', Validators.required],
         career: ['', Validators.required],
@@ -46,6 +46,7 @@ export default class RegisterComponent {
   public register(): void {
 
     if( this.registerForm.invalid ) {
+      this.modalService.openModal('Error', '¡Por favor, complete todos los campos!','error');
       this.registerForm.markAllAsTouched();
       return;
     }
@@ -56,7 +57,14 @@ export default class RegisterComponent {
       takeUntilDestroyed(this._destroyRef)
     ).subscribe({
       next: (response) => {
-        console.log(response)
+        const buttonConfig = { acceptText: 'Iniciar sesión', showCancel: false };
+        this.modalService.openModal('Success', '¡Usuario registrado correctamente!','success', buttonConfig).subscribe({
+          next: (response) => {
+            if(response) {
+              this.router.navigate(['/login']);
+            }
+          }
+        })
       }
       ,error: (error) => {
         console.log(error)

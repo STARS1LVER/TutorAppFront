@@ -94,25 +94,17 @@
 
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Carrera</label>
-          <input type="text" 
-                 formControlName="career"
-                 class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-[rgb(156,22,20)] focus:border-[rgb(156,22,20)] outline-none"
-                 [ngClass]="{'border-red-500': getFieldError('career')}">
+          <select formControlName="career"
+                  class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-[rgb(156,22,20)] focus:border-[rgb(156,22,20)] outline-none"
+                  [ngClass]="{'border-red-500': getFieldError('career')}">
+            <option value="">Selecciona carrera</option>
+            <option value="ingenieria_sistemas">Ingeniería de Sistemas</option>
+          </select>
           <span class="text-red-500 text-xs mt-1" *ngIf="getFieldError('career')">
             {{ getFieldError('career') }}
           </span>
         </div>
 
-        <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">URL de imagen</label>
-          <input type="url" 
-                 formControlName="image"
-                 class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-[rgb(156,22,20)] focus:border-[rgb(156,22,20)] outline-none"
-                 [ngClass]="{'border-red-500': getFieldError('image')}">
-          <span class="text-red-500 text-xs mt-1" *ngIf="getFieldError('image')">
-            {{ getFieldError('image') }}
-          </span>
-        </div>
 
         <div class="grid grid-cols-2 gap-4">
           <div>

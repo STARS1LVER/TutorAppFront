@@ -1,18 +1,19 @@
-
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MAT_NATIVE_DATE_FORMATS, NativeDateAdapter } from '@angular/material/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideClientHydration } from '@angular/platform-browser';
+import { tokenInterceptor } from './core/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
-      providers: [
-            provideZoneChangeDetection({ eventCoalescing: true }),
-            provideRouter(routes, withViewTransitions({
-                  skipInitialTransition: true,
-            })),
-            provideHttpClient(),
-            provideAnimations()
-      ]
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideAnimations(),
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    { provide: DateAdapter, useClass: NativeDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS }
+  ]
 };

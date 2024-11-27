@@ -1,47 +1,79 @@
-
-
 <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="https://www.cuc.edu.co/wp-content/uploads/2024/03/logo_cuc.png" class="h-12" alt="Flowbite Logo">
-    </a>
-    <div class="flex md:order-2 rtl:space-x-reverse">
-        <div class="inline-flex rounded-lg relative whitespace-nowrap">
-            <button type="button" routerLink="/login" 
-                class="px-3 py-2 text-sm font-medium text-[#1d1d1b] bg-white border border-[#1d1d1b] rounded-s-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                <span class="hidden md:inline mr-1">Iniciar sesión</span>
-                <i class="fa-solid fa-right-to-bracket" style="color: #222222;"></i>
-            </button>
-        
-            <button type="button" routerLink="/register" 
-                class="px-3 py-2 text-sm font-medium text-white bg-[#1d1d1b] border border-[#1d1d1b] rounded-e-lg hover:bg-[#2d2d2b] focus:ring-4 focus:outline-none focus:ring-blue-300">
-                <span class="hidden md:inline mr-1">Registrarse</span>
-                <i class="fa-regular fa-address-card" style="color: #f0f0f0;"></i>
+        <a routerLink="/welcome-page" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="https://www.cuc.edu.co/wp-content/uploads/2024/03/logo_cuc.png" class="h-12" alt="Flowbite Logo">
+        </a>
+        <div class="flex md:order-2 rtl:space-x-reverse">
+            <div class="inline-flex rounded-lg relative whitespace-nowrap">
+                <ng-container *ngIf="!isLoggedIn">
+                    <button type="button" routerLink="/login" 
+                        class="px-3 py-2 text-sm font-medium text-[#1d1d1b] bg-white border border-[#1d1d1b] rounded-s-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        <span class="hidden md:inline mr-1">Iniciar sesión</span>
+                        <i class="fa-solid fa-right-to-bracket" style="color: #222222;"></i>
+                    </button>
+                
+                    <button type="button" routerLink="/register" 
+                        class="px-3 py-2 text-sm font-medium text-white bg-[#1d1d1b] border border-[#1d1d1b] rounded-e-lg hover:bg-[#2d2d2b] focus:ring-4 focus:outline-none focus:ring-blue-300">
+                        <span class="hidden md:inline mr-1">Registrarse</span>
+                        <i class="fa-regular fa-address-card" style="color: #f0f0f0;"></i>
+                    </button>
+                </ng-container>
+
+                <button *ngIf="isLoggedIn" 
+                        (click)="logout()"
+                        class="px-3 py-2 text-sm font-medium text-white bg-[#1d1d1b] border  border-[#1d1d1b] rounded-lg hover:bg-[#8a1216] focus:ring-4 focus:outline-none focus:ring-red-300">
+                    <span class="hidden md:inline mr-1">Cerrar sesión</span>
+                    <i class="fa-solid fa-sign-out-alt" style="color: #ffffff;"></i>
+                </button>
+            </div>
+            <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
             </button>
         </div>
-        <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-          </svg>
-      </button>
-    </div>
-    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-[#242323] md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li>
-          <a href="#" class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#9c1614] md:p-0 aria-[current=page]:bg-[rgb(156,22,20)] md:aria-[current=page]:bg-transparent md:aria-[current=page]:text-[#9c1614]" aria-current="page">Inicio</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#242323] md:hover:text-[#9c1614] md:p-0 aria-[current=page]:bg-[rgb(156,22,20)] md:aria-[current=page]:bg-transparent md:aria-[current=page]:text-[#9c1614]">Quiero ser tutor</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#242323] md:hover:text-[#9c1614] md:p-0 aria-[current=page]:bg-[rgb(156,22,20)] md:aria-[current=page]:bg-transparent md:aria-[current=page]:text-[#9c1614]">Recomendaciones</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#242323] md:hover:text-[#9c1614] md:p-0 aria-[current=page]:bg-[rgb(156,22,20)] md:aria-[current=page]:bg-transparent md:aria-[current=page]:text-[#9c1614]">Contactanos</a>
-        </li>
-      </ul>
-    </div>
+        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+            <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-[#242323] md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <ng-container *ngIf="!isLoggedIn">
+                    <li>
+                        <a routerLink="/welcome-page" 
+                           routerLinkActive="md:text-[#9c1614]" 
+                           class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#242323] md:p-0" 
+                           aria-current="page">Bienvenido</a>
+                    </li>
+                    <li>
+                        <a routerLink="/login" 
+                           routerLinkActive="md:text-[#9c1614]" 
+                           class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#242323] md:p-0">Quiero ser tutor</a>
+                    </li>
+                    <li>
+                        <a routerLink="/under-construction" 
+                           routerLinkActive="md:text-[#9c1614]" 
+                           class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#242323] md:p-0">Recomendaciones</a>
+                    </li>
+                </ng-container>
+
+                <ng-container *ngIf="isLoggedIn">
+                    <li>
+                        <a routerLink="/welcome-page" 
+                           routerLinkActive="md:text-[#9c1614]" 
+                           class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#242323] md:p-0">Inicio</a>
+                    </li>
+                    <li>
+                        <a routerLink="/students/list-subjects" 
+                           routerLinkActive="md:text-[#9c1614]" 
+                           class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#242323] md:p-0">Materias</a>
+                    </li>
+                    <li>
+                        <a routerLink="/under-construction" class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#242323] md:hover:text-[#9c1614] md:p-0">Mis Tutorías</a>
+                    </li>
+                    <li>
+                        <a routerLink="/under-construction" class="block py-2 px-3 text-white rounded hover:bg-[rgb(156,22,20)] md:hover:bg-transparent md:text-[#242323] md:hover:text-[#9c1614] md:p-0">Mi Perfil</a>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
     </div>
 </nav>
   

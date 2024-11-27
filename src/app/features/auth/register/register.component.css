@@ -16,7 +16,6 @@ select option:hover {
     box-shadow: 0 0 10px 100px rgb(156,22,20) inset !important;
 }
 
-/* Para Firefox */
 select:-moz-focusring {
     color: transparent !important;
     text-shadow: 0 0 0 #000 !important;
