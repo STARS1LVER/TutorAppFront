@@ -1,4 +1,5 @@
 
 export const environment = {
-    apiUrl: 'http://localhost:8080/'
+    // api_url: 'localhost:3000',
+    apiUrl: 'https://tutorapp-latest-1.onrender.com/'
 }

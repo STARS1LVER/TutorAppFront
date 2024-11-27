@@ -37,7 +37,7 @@ export default class SubjectComponent {
       finalize(() => toggleLoader(this.loaderService, false))
     ).subscribe({
       next: (res) => {
-        console.log(res);
+        // console.log(res);
         this.subjects = res
       },
       error: (error) => {

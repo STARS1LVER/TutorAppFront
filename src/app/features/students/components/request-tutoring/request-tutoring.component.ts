@@ -33,7 +33,7 @@ export class RequestTutoringComponent {
   }
 
   ngOnInit(): void {
-    console.log(this.tutores);
+    // console.log(this.tutores);
   }
 
   cerrarModal() {
@@ -59,7 +59,7 @@ export class RequestTutoringComponent {
       })
     ).subscribe({
       next: (res) => {
-        console.log(res);
+        // console.log(res);
         this.modalService.openModal('Exitoso!', 'Pronto se te enviará un correo con los detalles de la tutoría', 'success');
       },
       error: (error) => {

@@ -46,7 +46,7 @@ export default class SubjectInfoComponent {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
-      console.log(params['id']);
+      // console.log(params['id']);
       this.getSubjectById(params['id']);
     })
     
